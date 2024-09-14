@@ -34,3 +34,6 @@ def random_vulnerability_and_description():
     vulnerability_desc = security_vulnerabilities[vulnerability]
 
     return vulnerability, vulnerability_desc
+
+def random_risk_level():
+    return random.randint(1,10)

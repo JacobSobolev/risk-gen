@@ -1,6 +1,6 @@
 from flask import Blueprint
 from app.api.api_utils import (random_device_and_manufacturer, random_ipv4, random_time_in_past_month,
-                               random_vulnerability_and_description)
+                               random_vulnerability_and_description, random_risk_level)
 
 api_bp = Blueprint("api", __name__)
 
@@ -19,6 +19,7 @@ def gen_report():
         "ip": random_ipv4(),
         "date": random_time_in_past_month(),
         "vulnerability": vulnerability,
-        "vulnerability_desc": vulnerability_desc
+        "vulnerability_desc": vulnerability_desc,
+        "risk_level": random_risk_level()
     }
     return record
