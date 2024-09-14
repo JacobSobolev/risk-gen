@@ -11,11 +11,11 @@ def generate_random_ipv4():
 
 @api_bp.route("/report")
 def gen_report():
-    device, manufactorer = random_device_and_manufacturer()
+    device_type, manufacturer = random_device_and_manufacturer()
     vulnerability, vulnerability_desc = random_vulnerability_and_description()
     record = {
-        "device": device,
-        "manufactorer": manufactorer,
+        "device_type": device_type,
+        "manufacturer": manufacturer,
         "ip": random_ipv4(),
         "date": random_time_in_past_month(),
         "vulnerability": vulnerability,
