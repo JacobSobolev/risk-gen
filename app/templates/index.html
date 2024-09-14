@@ -4,6 +4,80 @@
 Risk Gen API
 {% endblock %}
 
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='style.css')}}">
+{% endblock %}
+
 {% block content %}
-    <h1>Risk Gen Api</h1>
+        <div class="hero">
+          <div class="container">
+            <div class="hero-content">
+              <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 text-center">
+                  <h1>Risk Gen API</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 text-center ">
+                <h2>About the API</h2>
+                <p>
+                    <strong>Risk Gen API</strong> provides a flexible way to generate <strong>FAKE</strong> cybersecurity risk reports.
+                </p>
+                <p>
+                    Designed for developers and security professionals to test in various applications.
+                    this API allows you to retrieve randomized risk assessments for various types of endpoints, including servers, network devices, and firewalls.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h3>Usage</h3>
+                <div class="code-box">
+                    <code>GET {{ request.url + url_for('api.gen_report').strip('/') }}</code>
+                </div>
+                <br >
+                <div class="code-box">
+                    <code>GET {{ request.url + url_for('api.gen_report').strip('/') }}?records=50</code>
+                </div>
+                <p class="text-center"> the param 'records' needs to be between 1 and 100</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h3>Example Response</h3>
+                <div class="code-box">
+                    <pre>[
+  {
+    "date": "Sat, 07 Sep 2024 16:34:22 GMT",
+    "device_type": "VPN Gateway",
+    "ip": "156.44.130.165",
+    "manufacturer": "Fortinet",
+    "risk_level": 7,
+    "vulnerability": "Insecure Cloud Storage",
+    "vulnerability_desc": "Vulnerabilities in cloud storage configurations."
+  },
+]</pre>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <footer class="footer navbar-fixed-bottom text-center">
+        <div class="container">
+            <p>Written by Jacob Sobolev <a href="https://github.com/JacobSobolev/risk-gen" target="_blank">Link to source code</a></p>
+        </div>
+    </footer>
+
 {% endblock %}
