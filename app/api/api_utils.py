@@ -1,6 +1,9 @@
 import random
 from datetime import datetime, timedelta
-from app.api.data import device_manufacturers
+from app.api.data import device_manufacturers, security_vulnerabilities
+
+device_types_list = list(device_manufacturers.keys())
+security_vul_list = list(security_vulnerabilities.keys())
 
 def random_ipv4():
     """return a random ip v4"""
@@ -9,13 +12,10 @@ def random_ipv4():
 
 def random_time_in_past_month():
     """return a random date for the last month"""
-    now = datetime.now()
-    start_date = now - timedelta(days=30)
-    delta_days = (now - start_date).days
-    random_days = random.randint(0, delta_days)
-    random_date = start_date + timedelta(days=random_days)
+    random_days = random.randint(0, 30)
+    random_date = datetime.now() - timedelta(days=random_days)
 
-    random_seconds = random.randint(0, 86399)
+    random_seconds = random.randint(0, 86400)
     random_time = timedelta(seconds=random_seconds)
 
     random_datetime = datetime.combine(random_date, datetime.min.time()) + random_time
@@ -24,8 +24,13 @@ def random_time_in_past_month():
 
 def random_device_and_manufacturer():
     """return a random device type and possible manufacturer"""
-    device_type = random.choice(list(device_manufacturers.keys()))
+    device_type = random.choice(device_types_list)
     manufacturer = random.choice(device_manufacturers[device_type])
 
     return device_type, manufacturer
 
+def random_vulnerability_and_description():
+    vulnerability = random.choice(security_vul_list)
+    vulnerability_desc = security_vulnerabilities[vulnerability]
+
+    return vulnerability, vulnerability_desc

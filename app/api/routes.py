@@ -1,5 +1,6 @@
 from flask import Blueprint
-from app.api.api_utils import random_device_and_manufacturer, random_ipv4, random_time_in_past_month
+from app.api.api_utils import (random_device_and_manufacturer, random_ipv4, random_time_in_past_month,
+                               random_vulnerability_and_description)
 
 api_bp = Blueprint("api", __name__)
 
@@ -11,10 +12,13 @@ def generate_random_ipv4():
 @api_bp.route("/report")
 def gen_report():
     device, manufactorer = random_device_and_manufacturer()
+    vulnerability, vulnerability_desc = random_vulnerability_and_description()
     record = {
         "device": device,
         "manufactorer": manufactorer,
         "ip": random_ipv4(),
-        "date": random_time_in_past_month()
+        "date": random_time_in_past_month(),
+        "vulnerability": vulnerability,
+        "vulnerability_desc": vulnerability_desc
     }
     return record
