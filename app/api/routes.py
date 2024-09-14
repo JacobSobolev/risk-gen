@@ -1,14 +1,20 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from app.api.api_utils import (random_device_and_manufacturer, random_ipv4, random_time_in_past_month,
                                random_vulnerability_and_description, random_risk_level)
+
+DEFUALT_NUM_RECORDS = 10
 
 api_bp = Blueprint("api", __name__)
 
 @api_bp.route("/report")
 def gen_report():
-    num_of_records = 10
+    try:
+        num_records = int(request.args.get('records', default=DEFUALT_NUM_RECORDS))
+    except ValueError:
+        num_records = DEFUALT_NUM_RECORDS
+
     records = []
-    for _ in range(num_of_records):
+    for _ in range(num_records):
         device_type, manufacturer = random_device_and_manufacturer()
         vulnerability, vulnerability_desc = random_vulnerability_and_description()
         record = {
